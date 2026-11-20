@@ -1,95 +1,79 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ku">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#000000">
-  <title>Welcome</title>
-  <style>
-    * { box-sizing: border-box; }
-    html, body { width: 100%; height: 100%; margin: 0; background: #000; }
-    body { overflow: hidden; font-family: system-ui, -apple-system, Segoe UI, sans-serif; }
-    .intro {
-      position: fixed; inset: 0; display: grid; place-items: center;
-      background: #000; overflow: hidden;
-    }
-    video {
-      width: 100%; height: 100%; object-fit: contain; background: #000;
-    }
-    .enter-wrap {
-      position: absolute; inset: auto 0 max(7vh, 28px); display: flex;
-      justify-content: center; padding: 0 20px;
-      opacity: 0; visibility: hidden; transform: translateY(12px);
-      transition: opacity .45s ease, transform .45s ease, visibility .45s;
-      pointer-events: none;
-    }
-    .enter-wrap.visible {
-      opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto;
-    }
-    .enter {
-      min-width: 170px; padding: 15px 34px; border: 1px solid #39ff88;
-      border-radius: 4px; color: #39ff88; background: rgba(0, 12, 5, .88);
-      font: 700 15px/1 system-ui, sans-serif; letter-spacing: .22em;
-      cursor: pointer; text-decoration: none; text-align: center;
-      box-shadow: 0 0 12px rgba(57,255,136,.35), inset 0 0 12px rgba(57,255,136,.08);
-      transition: background .2s ease, color .2s ease, box-shadow .2s ease;
-    }
-    .enter:hover, .enter:focus-visible {
-      color: #001b0a; background: #39ff88;
-      box-shadow: 0 0 25px rgba(57,255,136,.7);
-      outline: none;
-    }
-    .fallback {
-      position: absolute; inset: 0; display: none; place-items: center;
-      color: #39ff88; text-align: center; padding: 24px;
-      background: radial-gradient(ellipse, #07150c, #000 70%);
-    }
-    .fallback.show { display: grid; }
-    .fallback p { max-width: 32rem; line-height: 1.6; }
-    @media (max-width: 600px) {
-      .enter-wrap { bottom: max(5vh, 22px); }
-      .enter { min-width: 150px; padding: 14px 28px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .enter-wrap, .enter { transition: none; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hacker Welcome</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: #00ff66;
+  font-family: sans-serif;
+  text-align: center;
+}
+
+#intro {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+video {
+  width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+}
+
+#enter {
+  display: none;
+  padding: 15px 45px;
+  margin: 20px;
+  background: #00ff66;
+  color: black;
+  border: none;
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: bold;
+  cursor: pointer;
+}
+</style>
 </head>
+
 <body>
-  <main class="intro" aria-label="Intro video">
-    <video id="introVideo" autoplay muted playsinline preload="auto">
-      <source src="intro.mp4" type="video/mp4">
-      Your browser does not support HTML video.
-    </video>
 
-    <div class="enter-wrap" id="enterWrap">
-      <!-- Change index.html below to the page you want visitors to open. -->
-      <a class="enter" href="home.html">ENTER</a>
-    </div>
+<div id="intro">
 
-    <div class="fallback" id="fallback">
-      <div>
-        <p>The intro video could not be loaded. Make sure <b>intro.mp4</b> is in the same folder as this page.</p>
-        <button class="enter" type="button" id="continueBtn">ENTER</button>
-      </div>
-    </div>
-  </main>
+  <video id="myVideo" autoplay muted playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
 
-  <script>
-    const video = document.getElementById('introVideo');
-    const enterWrap = document.getElementById('enterWrap');
-    const fallback = document.getElementById('fallback');
+  <button id="enter" onclick="goHome()">
+    ENTER
+  </button>
 
-    video.addEventListener('ended', () => enterWrap.classList.add('visible'));
-    video.addEventListener('error', () => fallback.classList.add('show'));
-    document.getElementById('continueBtn').addEventListener('click', () => {
-      window.location.href = 'home.html';
-    });
+</div>
 
-    // If autoplay is blocked, the visitor can tap the video to start it.
-    video.addEventListener('click', () => {
-      if (video.paused && !video.ended) video.play().catch(() => {});
-    });
-  </script>
+<script>
+const video = document.getElementById("myVideo");
+const enter = document.getElementById("enter");
+
+video.addEventListener("ended", function() {
+  enter.style.display = "block";
+});
+
+function goHome() {
+  window.location.href = "home.html";
+}
+</script>
+
 </body>
 </html>
