@@ -43,6 +43,7 @@ video {
   border-radius: 8px;
   font-size: 22px;
   font-weight: bold;
+  cursor: pointer;
 }
 </style>
 </head>
@@ -51,9 +52,8 @@ video {
 
 <div id="intro">
 
-  <video id="myVideo" playsinline controls>
+  <video id="myVideo" autoplay muted playsinline>
     <source src="video.mp4" type="video/mp4">
-    ڤێ براوزەرێ تە پشتەڤانی ڤیدیۆ ناکەت.
   </video>
 
   <button id="enter" onclick="goHome()">
